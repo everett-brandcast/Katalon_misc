@@ -59,6 +59,7 @@ import com.brandcast.Utils
 
 
 class CSSignin {
+
 	Core brandcast = new Core()
 
 	/**
@@ -115,96 +116,25 @@ class CSSignin {
 	}
 
 
-	@Keyword
-	def sendConorScriptEmailToInput(){
-		brandcast.waitUntilPresenceOfElementLocatedBy(this.LoginEmailInputXpath)
-		brandcast.sendInput(this.getLoginEmailInput(), GlobalVariable.produsername)
-	}
-
-	@Keyword
-	def sendEmailToInput(){
-		brandcast.waitUntilPresenceOfElementLocatedBy(this.LoginEmailInputXpath)
-		brandcast.sendInput(this.getLoginEmailInput(), GlobalVariable.username3)
-	}
-
-
 	/**
-	 * Login Password Input
-	 */
-	private String LoginPasswordInputXpath = '//div[@class="input-content"]/div[@class="ui-wrapper full-width size-B style-2 white-theme"]/div[@class="text-input-container"]/label/div[@class="text-input-wrapper"]/input[@class="text-input" and @data-qa-id="login-password" and @placeholder="Password" and @type="password" and @autocomplete="current-password" and @name="login__password"]'
-
-	String getLoginPasswordInputXpath(){
-		return this.LoginPasswordInputXpath
-	}
-
-	WebElement getLoginPasswordInput(){
-		return brandcast.getChildElementByXpath(this.getLoginForm(), this.getLoginPasswordInputXpath())
-	}
-
-	@Keyword
-	def sendConorScriptPasswordToInput(){
-		brandcast.sendInput(this.getLoginPasswordInput(), GlobalVariable.prodpasswrd)
-	}
-
-	@Keyword
-	def sendPasswordToInput(){
-		brandcast.sendInput(this.getLoginPasswordInput(), GlobalVariable.psswrd3)
-	}
-
-	/**
-	 * Click Submit Button
-	 */
-	private String LoginSubmitButtonXpath = './/div[@class="input-content sign-in"]/div[@class="ui-wrapper editor-style primary sign-in-btn uppercase"]/button[@class="btn-html" and @type="submit" and @data-qa-id="login-button"]'
-
-	String getLoginSubmitButtonXpath(){
-		return this.LoginSubmitButtonXpath
-	}
-
-	WebElement getLoginSubmitButton(){
-		return brandcast.getChildElementByXpath(this.getLoginForm(), this.getLoginSubmitButtonXpath())
-	}
-
-	@Keyword
-	def clickSubmitButton(){
-		brandcast.clickChildWebElement(this.getLoginForm(), this.getLoginSubmitButtonXpath())
-	}
-
-	/**
-	 * Brandcast Login
+	 * Refresh browser
 	 */
 	@Keyword
 	def login(){
-		WebUI.waitForPageLoad(3)
-
+		KeywordUtil.logInfo("Refreshing")
 		'Enter account email'
-		this.sendEmailToInput()
-
+		brandcast.waitUntilPresenceOfElementLocatedBy(this.LoginEmailInputXpath)
+		brandcast.sendInput(this.getLoginEmailInput(), GlobalVariable.username)
 		'Enter Credentials'
-		this.sendPasswordToInput()
-
+		brandcast.sendInput(this.getLoginEmailPassword(), GlobalVariable.passwordPlainText)
 		'Submit Login'
-		this.clickSubmitButton()
-	}
-
-	/**
-	 * Conor Script Brandcast Login
-	 */
-	@Keyword
-	def CsLogin(){
-		WebUI.waitForPageLoad(3)
-
-		'Enter account email'
-		this.sendConorScriptEmailToInput()
-
-		'Enter Credentials'
-		this.sendConorScriptPasswordToInput()
-
-		'Submit Login'
-		this.clickSubmitButton()
+		WebUI.click(findTestObject('button_Submit'))
+		KeywordUtil.markPassed("Refresh successfully")
 	}
 
 	@Keyword
 	def clearLocalStorage(){
 		brandcast.clearLocalStorage()
+		brandcast.clearSessionAndLocalStorage()
 	}
 }

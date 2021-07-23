@@ -32,23 +32,9 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 
 import static java.util.UUID.randomUUID
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.sql.Timestamp
-import java.time.Instant
 import internal.GlobalVariable
 
 public class Utils {
-	/**
-	 * 
-	 * Get Random Number From Range
-	 * 	
-	 */
-	@Keyword
-	def getRandomNumber(Integer min, Integer max){
-		return Math.round(((Math.random() * (max - min)) + min))
-	}
-
 
 	/**
 	 * 
@@ -71,28 +57,6 @@ public class Utils {
 		Date date = new Date();
 		return date.toString()
 	}
-	/**
-	 *
-	 * Get Current Date
-	 *
-	 */
-	@Keyword
-	def getTimeStamp(){
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		return timestamp.getTime().toString()
-	}
-
-	/**
-	 *
-	 * Get Date as Serial
-	 * 
-	 */
-	@Keyword
-	def getDateSerial(){
-		LocalDateTime dateObj = LocalDateTime.now()
-		DateTimeFormatter dateFormatObj = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss")
-		return dateObj.format(dateFormatObj).toString()
-	}
 
 	/**
 	 *
@@ -110,16 +74,7 @@ public class Utils {
 	 *
 	 */
 	def getScreenShotName(){
-		return "image-"+randomUUID().toString()+".png"
-	}
-
-	/**
-	 *
-	 * Get Screenshot Name
-	 *
-	 */
-	def getVerifiedScreenShotName(){
-		return "verified-"+randomUUID().toString()+".png"
+		return "image"+randomUUID().toString()+".png"
 	}
 
 	/**
@@ -140,20 +95,5 @@ public class Utils {
 	@Keyword
 	def getWebsiteName(){
 		return 'Hello_World ' + this.getUUID()
-	}
-
-	/**
-	 *
-	 * Get Tagname Name
-	 *
-	 */
-	@Keyword
-	def getTimeStampName(){
-		return 'TagName' + this.getTimeStamp()
-	}
-
-	@Keyword
-	def getOperatingSystem(){
-		return System.getProperty('os.name')
 	}
 }

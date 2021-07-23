@@ -1,4 +1,5 @@
 package com.designstudio
+
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
@@ -20,10 +21,6 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords
 
 import internal.GlobalVariable
 
-import org.openqa.selenium.WebElement
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.By
-
 import com.kms.katalon.core.mobile.keyword.internal.MobileDriverFactory
 import com.kms.katalon.core.webui.driver.DriverFactory
 
@@ -37,26 +34,49 @@ import com.kms.katalon.core.util.KeywordUtil
 
 import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
+/*Selenium*/
+import org.openqa.selenium.By
+import org.openqa.selenium.By.ByXPath
+import org.openqa.selenium.Keys as Keys
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.WebElement
+import org.openqa.selenium.interactions.Actions
+import org.openqa.selenium.StaleElementReferenceException
+import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.ui.WebDriverWait
 
-class DSSignin {
+/*Custom Keyword*/
+import com.brandcast.Core
+import com.brandcast.Utils
+
+public class WelcomeScreen {
+	Core brandcast = new Core()
+	Utils utils = new Utils()
+
 
 	/**
-	 * Get Account Selector
-	 * @param WebDriver driver
-	 * @param String elementXpath
+	 * 
+	 * Welcome Screen 
+	 * 
 	 */
-	@Keyword
-	def getAccountSelector(WebElement element, String elementXpath) {
-			'Account Selector'
-			WebElement targetElement = element.findElement(By.xpath(elementXpath));
-			KeywordUtil.markPassed("Account Selector Found")
-			return targetElement
+	private String WelcomeScreenXpath = '//div[@class="welcome-screen-container"]'
+
+	String getWelcomeScreenXpath(){
+		return this.WelcomeScreenXpath
 	}
 
-	def selectAutomationAccount(WebDriver driver, String elementXpath){
-			'Account Icon'
-			WebElement element = driver.findElement(By.xpath(elementXpath));
-			KeywordUtil.markPassed("Automation Account Found")
-			return element
+	WebElement getWelcomeScreen(){
+		return brandcast.getElementByXpath(this.getWelcomeScreenXpath())
+	}
+
+	/**
+	 *
+	 * Click Open Website Button
+	 *
+	 */
+	@Keyword
+	def clickOpenWebSiteButton(){
+		'Click Open Website'
+		WebUI.click(findTestObject('Page_Brandcast Design Studio/div_open_website_button'))
 	}
 }

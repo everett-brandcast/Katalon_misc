@@ -1,4 +1,4 @@
-package com.brandcast
+package com.contentstudio
 import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
@@ -37,10 +37,16 @@ import com.kms.katalon.core.util.KeywordUtil
 
 import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
-import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.chrome.ChromeOptions
 
-
-
-class Base {
+class Signin {
+	/**
+	 * Refresh browser
+	 */
+	@Keyword
+	def refreshBrowser() {
+		KeywordUtil.logInfo("Refreshing")
+		WebDriver webDriver = DriverFactory.getWebDriver()
+		webDriver.navigate().refresh()
+		KeywordUtil.markPassed("Refresh successfully")
+	}
 }

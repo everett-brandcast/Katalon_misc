@@ -1,4 +1,5 @@
-package com.brandcast
+package com.designstudio
+
 
 /*Java*/
 import java.awt.AWTException
@@ -43,7 +44,8 @@ import com.kms.katalon.core.testobject.ConditionType
 import com.kms.katalon.core.testobject.TestObjectProperty
 import com.kms.katalon.core.webui.exception.WebElementNotFoundException
 
-import org.junit.After
+
+/* Selenium */
 import org.openqa.selenium.By
 import org.openqa.selenium.By.ByXPath
 import org.openqa.selenium.Keys as Keys
@@ -58,25 +60,21 @@ import org.openqa.selenium.support.ui.WebDriverWait
 import com.brandcast.Core
 import com.brandcast.Utils
 
-public class BcMain {
+class Stage {
 	Core brandcast = new Core()
 	Utils utils = new Utils()
-	/**=============================================================================================================
-	 * Admin Container
+
+	/**
+	 * Stage New Website Tab
 	 *
-	 **/
-	private String AdminContainerXpath = '//span[contains(@id,"app")and contains(@class, "design-studio-root")]/div/span[contains(@class,"app-container") and contains(@class,"hidden-launch") and contains(@class,"dashboard") and contains(@class,"app-ready") and contains(@class,"logged-in")]/div[@class="admin-wrapper"]'
+	 */
+	private StageNewWebsiteTabXpath = '//div[@class="stage bc-desktop icon type-page"]/div[@class="toolbar position-top-tabs animated fadeInDown"]/div[@class="tab-content-container"]/a[@class="tab website"]/div[@class="tab-text"]'
 
-	String getAdminContainerXpath(){
-		return this.AdminContainerXpath
+	String getStageNewWebsiteTabXpath(){
+		return this.StageNewWebsiteTabXpath
 	}
 
-	WebElement getAdminContainer(){
-		return brandcast.getElementByXpath(this.getAdminContainerXpath())
-	}
-
-	@Keyword
-	def waitForAdminContainer(){
-		brandcast.waitUntilPresenceOfElementLocatedBy(this.getAdminContainerXpath())
+	WebElement getStageNewWebsiteTab(){
+		return brandcast.getElementByXpath(this.getStageNewWebsiteTabXpath())
 	}
 }

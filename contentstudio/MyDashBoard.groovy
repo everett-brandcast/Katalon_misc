@@ -59,6 +59,7 @@ import com.brandcast.Utils
 
 
 class MyDashBoard {
+
 	Core brandcast = new Core()
 	Utils utils = new Utils()
 
